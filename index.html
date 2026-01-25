@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kartikeya | Portfolio</title>
+
+    <!-- CONNECT CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <div class="navbar">
+        <div class="logo">Kartikeya</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <!-- HERO -->
+    <div id="home" class="section hero">
+        <div class="hero-left zoom-in">
+            <h1>Hi, I'm Kartikeya 👋</h1>
+            <h3>Aspiring Software Developer</h3>
+            <p>
+                I build clean, responsive, and user-friendly web applications.
+                Focused on mastering Web Development & DSA for top internships.
+            </p>
+
+            <div class="btn-group">
+                <button>View Projects</button>
+                <button>Download Resume</button>
+            </div>
+        </div>
+
+        <div class="hero-right zoom-in delay1">
+            <img src="1758628810350.png" alt="Kartikeya">
+        </div>
+    </div>
+
+
+    <!-- ABOUT -->
+    <div id="about" class="section slide-up">
+        <h2>About Me</h2>
+        <p>
+            I am a B.Tech student passionate about software development, problem solving, 
+            and building impactful digital products. I focus on mastering fundamentals and 
+            building real-world projects.
+        </p>
+    </div>
+
+    <!-- SKILLS -->
+    <div id="skills" class="section">
+        <h2>Skills</h2>
+        <div class="skills-grid">
+            <div class="card">HTML</div>
+            <div class="card">CSS</div>
+            <div class="card">JavaScript</div>
+            <div class="card">C++</div>
+            <div class="card">Python</div>
+            <div class="card">Git & GitHub</div>
+        </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div id="projects" class="section">
+        <h2>Projects</h2>
+
+        <div class="project-card">
+            <h3>Portfolio Website</h3>
+            <p>Personal professional portfolio website.</p>
+        </div>
+
+        <div class="project-card">
+            <h3>To-Do App</h3>
+            <p>Task management web application.</p>
+        </div>
+
+        <div class="project-card">
+            <h3>Student Productivity Dashboard</h3>
+            <p>Study + productivity tracker.</p>
+        </div>
+    </div>
+
+    <!-- CONTACT -->
+    <div id="contact" class="section">
+        <h2>Contact</h2>
+
+        <form class="contact-form">
+            <input type="text" placeholder="Your Name">
+            <input type="email" placeholder="Your Email">
+            <textarea placeholder="Your Message"></textarea>
+            <button>Send Message</button>
+        </form>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <p>Made with ❤️ by Kartikeya</p>
+    </div>
+
+    <script>
+        const sections = document.querySelectorAll(".section");
+
+        const revealSection = () => {
+        const trigger = window.innerHeight * 0.85;
+
+        sections.forEach(section => {
+            const top = section.getBoundingClientRect().top;
+            if (top < trigger) {
+            section.classList.add("active");
+            }
+        });
+        };
+
+        window.addEventListener("scroll", revealSection);
+        revealSection();
+    </script>
+
+<div id="scroll-bar"></div>
+<div class="cursor"></div>
+
+
+<canvas id="particles"></canvas>
+
+<script>
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for (let i = 0; i < 80; i++) {
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 2 + 1,
+    dx: Math.random() * 0.6 - 0.3,
+    dy: Math.random() * 0.6 - 0.3
+  });
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "rgba(56,189,248,0.7)";
+
+  particles.forEach(p => {
+    p.x += p.dx;
+    p.y += p.dy;
+
+    if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+</script>
+<script>
+/* LOADER */
+window.addEventListener("load", () => {
+  document.getElementById("loader").style.display = "none";
+});
+
+/* SCROLL PROGRESS BAR */
+window.addEventListener("scroll", () => {
+  let scrollTop = document.documentElement.scrollTop;
+  let scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  let progress = (scrollTop / scrollHeight) * 100;
+  document.getElementById("scroll-bar").style.width = progress + "%";
+});
+
+/* CURSOR GLOW */
+const cursor = document.querySelector(".cursor");
+
+document.addEventListener("mousemove", e => {
+  cursor.style.left = e.clientX + "px";
+  cursor.style.top = e.clientY + "px";
+});
+
+/* PARALLAX SCROLL EFFECT */
+document.addEventListener("scroll", () => {
+  document.querySelectorAll(".section").forEach(sec => {
+    sec.style.transform = `translateY(${window.scrollY * 0.05}px)`;
+  });
+});
+
+/* 3D TILT EFFECT */
+document.querySelectorAll(".card, .project-card").forEach(card => {
+  card.addEventListener("mousemove", e => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = (y - centerY) / 15;
+    const rotateY = (x - centerX) / 15;
+
+    card.style.transform = `rotateX(${ -rotateX }deg) rotateY(${ rotateY }deg) scale(1.1)`;
+  });
+
+  card.addEventListener("mouseleave", () => {
+    card.style.transform = "rotateX(0) rotateY(0) scale(1)";
+  });
+});
+</script>
+
+</body>
+
+<!-- PAGE LOADER -->
+<div id="loader">
+  <div class="spinner"></div>
+</div>
+
+
+</html>
