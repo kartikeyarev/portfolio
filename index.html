@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark scroll-smooth">
+<html lang="en" class="dark scroll-smooth snap-y snap-mandatory scroll-pt-16">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +7,66 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
+            .glass-nav {
+            background: rgba(15, 23, 42, 0.1); /* Very transparent dark */
+            backdrop-filter: blur(12px); /* The "frosted" effect */
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Class to be added via JavaScript on scroll */
+        .nav-scrolled {
+            background: rgba(15, 23, 42, 0.8); /* Darker on scroll */
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2); /* Indigo glow border */
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(99, 102, 241, 0.4);
+            transform: translateY(-5px);
+}
+                /* Hide scrollbar for Chrome, Safari and Opera */
+        html::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        html {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+        /* Smooth Scroll behavior is already in your <html> tag, 
+        but this ensures it works across all browsers */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Initial state for scroll animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        /* State when the element enters the viewport */
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0f172a; }
@@ -22,41 +82,80 @@
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans selection:bg-indigo-500/30">
+    <div class="fixed top-20 -left-20 w-72 h-72 bg-indigo-500/20 rounded-full blur-[120px] -z-10"></div>
+<div class="fixed bottom-20 -right-20 w-72 h-72 bg-purple-500/20 rounded-full blur-[120px] -z-10"></div>
 
-    <nav class="fixed w-full z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-800">
-        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-            <span class="text-xl font-black tracking-tighter text-indigo-500">KARTIK<span class="text-white">EYA</span></span>
-            <div class="space-x-6 hidden lg:flex font-medium text-slate-400 text-sm">
-                <a href="#home" class="hover:text-indigo-400 transition">Home</a>
-                <a href="#about" class="hover:text-indigo-400 transition">About</a>
-                <a href="#skills" class="hover:text-indigo-400 transition">Skills</a>
-                <a href="#projects" class="hover:text-indigo-400 transition">Projects</a>
-                <a href="#achievements" class="hover:text-indigo-400 transition">Achievements</a>
-                <a href="#resume" class="hover:text-indigo-400 transition">Resume</a>
-                <a href="#contact" class="text-indigo-500 border border-indigo-500/50 px-3 py-1 rounded hover:bg-indigo-500 hover:text-white transition">Contact</a>
+    <nav id="navbar" class="glass-nav fixed w-full z-50 top-0 left-0">
+    <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between transition-all duration-300" id="nav-container">
+        <span class="text-2xl font-black tracking-tighter text-indigo-500">
+            KARTIK<span class="text-white">EYA</span>
+        </span>
+
+        <div class="hidden lg:flex items-center space-x-8 font-medium text-slate-400 text-sm">
+            <a href="#home" class="hover:text-indigo-400 transition-colors">Home</a>
+            <a href="#about" class="hover:text-indigo-400 transition-colors">About</a>
+            <a href="#skills" class="hover:text-indigo-400 transition-colors">Skills</a>
+            <a href="#projects" class="hover:text-indigo-400 transition-colors">Projects</a>
+            <a href="#achievements" class="hover:text-indigo-400 transition-colors text-white/90">Achievements</a>
+            <a href="#resume" class="hover:text-indigo-400 transition-colors">Resume</a>
+            
+            <a href="#contact" class="bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 px-5 py-2 rounded-full hover:bg-indigo-500 hover:text-white transition-all duration-300">
+                Contact
+            </a>
+        </div>
+
+        <button class="lg:hidden text-white">
+            <i data-lucide="menu"></i>
+        </button>
+    </div>
+</nav>
+
+    <section id="home" class="snap-start reveal min-h-screen flex items-center justify-center pt-24 px-6 lg:px-12 overflow-hidden">
+    <div class="max-w-6xl mx-auto w-full grid lg:grid-cols-2 gap-12 items-center">
+        
+        <div class="order-2 lg:order-1 text-center lg:text-left">
+            <div class="inline-block px-4 py-1.5 mb-6 text-[10px] font-bold tracking-[0.2em] text-indigo-400 uppercase bg-indigo-500/10 border border-indigo-500/20 rounded-lg">
+                IT Student @ MAIT
+            </div>
+            <h1 class="text-5xl md:text-7xl font-black mb-6 tracking-tighter leading-none text-white">
+                Hi, I'm <span class="text-indigo-500">Kartikeya</span> 👋
+            </h1>
+            <p class="text-xl md:text-2xl font-semibold text-slate-300 mb-4">
+                B.Tech Student | Aspiring Software Developer 
+            </p>
+            <p class="text-slate-400 max-w-xl mb-10 leading-relaxed text-lg">
+                I build clean, responsive, and user-friendly web applications. Currently focusing on the MERN stack and Data Structures to secure a 2026 tech internships
+            </p>
+            
+            <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
+                <a href="#projects" class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-xl font-bold transition-all shadow-xl shadow-indigo-500/20 active:scale-95">
+                    View Projects
+                </a>
+                <a href="Resume.pdf" download class="bg-slate-800 hover:bg-slate-700 text-white px-8 py-4 rounded-xl font-bold transition-all active:scale-95 flex items-center gap-2">
+                    <i data-lucide="download" class="w-4 h-4"></i> Download Resume
+                </a>
             </div>
         </div>
-    </nav>
 
-    <section id="home" class="min-h-screen flex flex-col items-center justify-center pt-20 px-6 text-center">
-        <div class="relative mb-8">
-            <div class="absolute inset-0 bg-indigo-500 rounded-full lur-2xl opacity-20 animate-pulse"></div>
-            <img src="1758628810350.png" alt="Kartikeya" class="relative w-56 h-56 md:w-64 md:h-64 rounded-full border-4 border-indigo-500/30 object-cover animate-glow">
-        </div>
-        
-        <h1 class="text-4xl md:text-6xl font-extrabold mb-4">Hi, I'm <span class="text-indigo-500">Kartikeya</span> 👋</h1>
-        <p class="text-xl md:text-2xl font-semibold text-slate-300 mb-2">B.Tech Student | Aspiring Software Developer</p>
-        <p class="text-slate-400 max-w-2xl mb-10 leading-relaxed">
-            I build clean, responsive, and user-friendly web applications. Currently learning full-stack development and Data Structures to secure a high-impact tech internship.
-        </p>
-        
-        <div class="flex flex-wrap gap-4 justify-center">
-            <a href="#projects" class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-full font-bold transition shadow-lg shadow-indigo-500/20">View Projects</a>
-            <a href="#resume" class="bg-slate-800 hover:bg-slate-700 text-white px-8 py-3 rounded-full font-bold transition">Download Resume</a>
-        </div>
-    </section>
+        <div class="order-2 lg:order-3 flex justify-center lg:justify-end reveal">
+            <div class="relative group">
+                <div class="absolute inset-0 bg-indigo-600 rounded-full blur-3xl opacity-20 group-hover:opacity-40 transition-opacity duration-500 animate-pulse"></div>
+                
+                <div class="relative p-2 rounded-full border border-white/10 glass-card">
 
-    <section id="about" class="py-24 px-6 border-t border-slate-900">
+<!--image of kartikeya-->
+                    <img src="image.jpeg" alt="Kartikeya" 
+                         class="w-80 h-80 lg:w-[480px] lg:h-[480px] rounded-full object-cover 
+                        opacity-90 group-hover:opacity-105 transition-all duration-700 
+                        scale-100 group-hover:scale-105 animate-glow">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+    <section id="about" class="snap-start reveal py-24 px-6 border-t border-slate-900">
         <div class="max-w-4xl mx-auto">
             <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
                 <i data-lucide="user" class="text-indigo-500"></i> About Me
@@ -69,10 +168,10 @@
         </div>
     </section>
 
-    <section id="skills" class="py-24 bg-slate-900/30 px-6">
+    <section id="skills" class="snap-start reveal py-24 bg-slate-900/30 px-6">
         <div class="max-w-6xl mx-auto">
             <h2 class="text-3xl font-bold mb-12 text-center">Technical Toolbox</h2>
-            <div class="grid md:grid-cols-3 gap-8">
+            <div class="reveal grid md:grid-cols-3 gap-8">
                 <div class="p-8 bg-slate-950 border border-slate-800 rounded-3xl">
                     <i data-lucide="monitor" class="text-indigo-500 mb-4"></i>
                     <h3 class="text-xl font-bold mb-4 text-white">Frontend</h3>
@@ -107,7 +206,7 @@
         </div>
     </section>
 
-    <section id="projects" class="py-24 px-6">
+    <section id="projects" class="snap-start reveal py-24 px-6">
         <div class="max-w-6xl mx-auto">
             <h2 class="text-3xl font-bold mb-12">Featured Projects</h2>
             <div class="grid md:grid-cols-3 gap-8">
@@ -145,7 +244,7 @@
         </div>
     </section>
 
-    <section id="achievements" class="py-24 bg-slate-900/30 px-6">
+    <section id="achievements" class="snap-start reveal slow py-24 bg-slate-900/30 px-6">
         <div class="max-w-4xl mx-auto">
             <h2 class="text-3xl font-bold mb-12 flex items-center gap-3">
                 <i data-lucide="award" class="text-indigo-500"></i> Responsibilities
@@ -173,17 +272,17 @@
         </div>
     </section>
 
-    <section id="resume" class="py-24 px-6 text-center border-t border-slate-900">
+    <section id="resume" class="snap-start py-24 px-6 text-center border-t border-slate-900">
         <div class="max-w-2xl mx-auto">
             <h2 class="text-3xl font-bold mb-6 italic text-indigo-500">Interested in working together?</h2>
             <p class="text-slate-400 mb-10">Download my resume to know more about my education, technical skills, and achievements.</p>
-            <a href="#" class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-10 py-4 rounded-xl font-bold transition shadow-xl shadow-indigo-500/30">
+            <a href="Resume.pdf" class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-10 py-4 rounded-xl font-bold transition shadow-xl shadow-indigo-500/30">
                 <i data-lucide="download" class="w-5 h-5"></i> Download Resume
             </a>
         </div>
     </section>
 
-    <section id="contact" class="py-24 px-6 bg-slate-900/30">
+    <section id="contact" class="snap-start py-24 px-6 bg-slate-900/30">
         <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16">
             <div>
                 <h2 class="text-4xl font-black mb-6">Let’s Connect 🤝</h2>
@@ -200,11 +299,24 @@
                     </div>
                 </div>
             </div>
-            <form action="#" class="space-y-4">
-                <input type="text" placeholder="Name" class="w-full bg-slate-950 border border-slate-800 p-4 rounded-xl focus:ring-2 ring-indigo-500 outline-none">
-                <input type="email" placeholder="Email" class="w-full bg-slate-950 border border-slate-800 p-4 rounded-xl focus:ring-2 ring-indigo-500 outline-none">
-                <textarea rows="4" placeholder="Message" class="w-full bg-slate-950 border border-slate-800 p-4 rounded-xl focus:ring-2 ring-indigo-500 outline-none"></textarea>
-                <button class="w-full bg-indigo-600 hover:bg-indigo-700 py-4 rounded-xl font-bold transition">Send Message</button>
+            <form action="https://formspree.io/f/xvgzlowy" method="POST" class="space-y-4">
+                <input type="text" name="name" placeholder="Name" 
+                    class="w-full bg-slate-950 border border-slate-800 p-4 rounded-xl focus:ring-2 ring-indigo-500 outline-none transition-all" 
+                    required>
+                
+                <input type="email" name="_replyto" placeholder="Email" 
+                    class="w-full bg-slate-950 border border-slate-800 p-4 rounded-xl focus:ring-2 ring-indigo-500 outline-none transition-all" 
+                    required>
+                
+                <textarea name="message" rows="4" placeholder="Message" 
+                        class="w-full bg-slate-950 border border-slate-800 p-4 rounded-xl focus:ring-2 ring-indigo-500 outline-none transition-all" 
+                        required></textarea>
+                
+                <input type="hidden" name="_subject" value="New Portfolio Message from Kartikeya's Website">
+                
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 py-4 rounded-xl font-bold transition-all shadow-lg shadow-indigo-500/20 active:scale-95">
+                    Send Message
+                </button>
             </form>
         </div>
     </section>
@@ -220,6 +332,21 @@
             const nav = document.querySelector("nav");
             window.scrollY > 50 ? nav.classList.add("bg-slate-950/95", "shadow-2xl") : nav.classList.remove("bg-slate-950/95", "shadow-2xl");
         });
+                // Intersection Observer for Scroll Animations
+        const observerOptions = {
+            threshold: 0.1 // Triggers when 10% of the element is visible
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        // Target all elements with the 'reveal' class
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
     </script>
 </body>
 </html>
