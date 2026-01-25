@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark scroll-smooth snap-y snap-mandatory scroll-pt-16">
+<html lang="en" class="dark scroll-smooth snap-y snap-mandatory lg:snap-y lg:snap-mandatory scroll-pt-16">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -284,24 +284,26 @@
         </div>
     </section>
 
-    <section id="contact" class="snap-start snap-always py-24 px-6 bg-slate-900/30">
-        <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16">
-            <div>
-                <h2 class="text-4xl font-black mb-6">Let’s Connect 🤝</h2>
+        <section id="contact" class="snap-start snap-always py-12 lg:py-24 px-6 bg-slate-900/30">
+        <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-8 lg:gap-16">
+            
+            <div class="flex flex-col justify-center">
+                <h2 class="text-3xl md:text-4xl font-black mb-6">Let’s Connect 🤝</h2>
                 <p class="text-slate-400 mb-8">Feel free to reach out for collaboration, internships, or learning opportunities.</p>
                 <div class="space-y-4">
                     <div class="flex items-center gap-4 text-slate-300">
                         <i data-lucide="mail" class="text-indigo-500"></i> studykartik7@gmail.com
                     </div>
                     <div class="flex items-center gap-4 text-slate-300">
-                        <i data-lucide="linkedin" class="text-indigo-500"></i> https://www.linkedin.com/in/kartikeyarev/
+                        <i data-lucide="linkedin" class="text-indigo-500"></i> linkedin.com/in/kartikeyarev
                     </div>
                     <div class="flex items-center gap-4 text-slate-300">
                         <i data-lucide="github" class="text-indigo-500"></i> github.com/kartikeyarev
                     </div>
                 </div>
             </div>
-            <form action="https://formspree.io/f/xvgzlowy" method="POST" class="space-y-4">
+
+            <form action="https://formspree.io/f/xvgzlowy" method="POST" class="space-y-4 mt-8 lg:mt-0">
                 <input type="text" name="name" placeholder="Name" 
                     class="w-full bg-slate-950 border border-slate-800 p-4 rounded-xl focus:ring-2 ring-indigo-500 outline-none transition-all" 
                     required>
@@ -349,18 +351,6 @@
 
         // Target all elements with the 'reveal' class
         document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
-
-        // Prevents accidental double-skipping of snapped sections
-        let isScrolling = false;
-
-        window.addEventListener('wheel', (e) => {
-            if (isScrolling) return;
-            
-            isScrolling = true;
-            setTimeout(() => {
-                isScrolling = false;
-            }, 1000); // 1-second "cooldown" before allowing the next major scroll snap
-        }, { passive: true });
 
     </script>
 </body>
