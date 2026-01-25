@@ -156,19 +156,16 @@ window.addEventListener("scroll", () => {
 });
 
 /* CURSOR GLOW */
-const cursor = document.querySelector(".cursor");
 
-document.addEventListener("mousemove", e => {
-  cursor.style.left = e.clientX + "px";
-  cursor.style.top = e.clientY + "px";
-});
+if (window.innerWidth > 900) {
+  const cursor = document.querySelector(".cursor");
 
-/* PARALLAX SCROLL EFFECT */
-document.addEventListener("scroll", () => {
-  document.querySelectorAll(".section").forEach(sec => {
-    sec.style.transform = `translateY(${window.scrollY * 0.05}px)`;
+  document.addEventListener("mousemove", e => {
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
   });
-});
+}
+
 
 /* 3D TILT EFFECT */
 document.querySelectorAll(".card, .project-card").forEach(card => {

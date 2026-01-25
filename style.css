@@ -274,3 +274,83 @@ button:hover {
   z-index: 10000;
 }
 
+/* ===== MOBILE PERFORMANCE OPTIMIZATION ===== */
+@media (max-width: 900px) {
+
+  /* Disable glowing cursor */
+  .cursor {
+    display: none !important;
+  }
+
+  /* Reduce heavy animations */
+  * {
+    animation: none !important;
+    transition: 0.2s ease !important;
+  }
+
+  /* Disable parallax motion */
+  .section {
+    transform: none !important;
+  }
+  body {
+    overflow-x: hidden;
+  }
+
+  .navbar {
+    padding: 12px 18px;
+  }
+
+  .logo {
+    font-size: 18px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+  }
+
+  .hero-left h1 {
+    font-size: 2.4rem;
+  }
+
+  .hero-left h3 {
+    font-size: 1.2rem;
+  }
+
+  .hero-left p {
+    font-size: 15px;
+    max-width: 95%;
+    margin: auto;
+  }
+
+  .hero-right img {
+    width: 180px;
+  }
+
+  .section {
+    padding: 90px 6% 60px;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .project-card {
+    width: 100%;
+    margin: 15px 0;
+  }
+
+  .contact-form {
+    width: 100%;
+  }
+
+  button {
+    width: 100%;
+    margin: 10px 0;
+  }
+}
