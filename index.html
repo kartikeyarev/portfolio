@@ -58,7 +58,7 @@
         .reveal {
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.8s ease-out;
+            transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         /* State when the element enters the viewport */
@@ -82,9 +82,11 @@
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans selection:bg-indigo-500/30">
-    <div class="fixed top-20 -left-20 w-72 h-72 bg-indigo-500/20 rounded-full blur-[120px] -z-10"></div>
-<div class="fixed bottom-20 -right-20 w-72 h-72 bg-purple-500/20 rounded-full blur-[120px] -z-10"></div>
-
+    <div class="fixed inset-0 -z-50 overflow-hidden pointer-events-none">
+        <div class="absolute -top-[20%] -left-[10%] w-[50vw] h-[50vw] bg-indigo-600/20 rounded-full blur-[120px] opacity-50 mix-blend-screen animate-pulse"></div>
+        <div class="absolute -bottom-[20%] -right-[10%] w-[50vw] h-[50vw] bg-purple-600/20 rounded-full blur-[120px] opacity-50 mix-blend-screen animate-pulse"></div>
+    </div>
+    
     <nav id="navbar" class="glass-nav fixed w-full z-50 top-0 left-0">
     <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between transition-all duration-300" id="nav-container">
         <span class="text-2xl font-black tracking-tighter text-indigo-500">
@@ -110,8 +112,8 @@
     </div>
 </nav>
 
-    <section id="home" class="snap-start reveal min-h-screen flex items-center justify-center pt-24 px-6 lg:px-12 overflow-hidden">
-    <div class="max-w-6xl mx-auto w-full grid lg:grid-cols-2 gap-12 items-center">
+    <section id="home" class="snap-start snap-always reveal min-h-screen flex items-center justify-center px-6 lg:px-12 overflow-hidden relative">
+    <div class="max-w-6xl mx-auto w-full grid lg:grid-cols-2 gap-10 items-center">
         
         <div class="order-2 lg:order-1 text-center lg:text-left">
             <div class="inline-block px-4 py-1.5 mb-6 text-[10px] font-bold tracking-[0.2em] text-indigo-400 uppercase bg-indigo-500/10 border border-indigo-500/20 rounded-lg">
@@ -155,7 +157,7 @@
     </div>
 </section>
 
-    <section id="about" class="snap-start reveal py-24 px-6 border-t border-slate-900">
+    <section id="about" class="snap-start snap-always reveal py-24 px-6 border-t border-slate-900">
         <div class="max-w-4xl mx-auto">
             <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
                 <i data-lucide="user" class="text-indigo-500"></i> About Me
@@ -168,7 +170,7 @@
         </div>
     </section>
 
-    <section id="skills" class="snap-start reveal py-24 bg-slate-900/30 px-6">
+    <section id="skills" class="snap-start snap-always reveal py-24 bg-slate-900/30 px-6">
         <div class="max-w-6xl mx-auto">
             <h2 class="text-3xl font-bold mb-12 text-center">Technical Toolbox</h2>
             <div class="reveal grid md:grid-cols-3 gap-8">
@@ -206,7 +208,7 @@
         </div>
     </section>
 
-    <section id="projects" class="snap-start reveal py-24 px-6">
+    <section id="projects" class="snap-start snap-always reveal py-24 px-6">
         <div class="max-w-6xl mx-auto">
             <h2 class="text-3xl font-bold mb-12">Featured Projects</h2>
             <div class="grid md:grid-cols-3 gap-8">
@@ -244,7 +246,7 @@
         </div>
     </section>
 
-    <section id="achievements" class="snap-start reveal slow py-24 bg-slate-900/30 px-6">
+    <section id="achievements" class="snap-start snap-always reveal slow py-24 bg-slate-900/30 px-6">
         <div class="max-w-4xl mx-auto">
             <h2 class="text-3xl font-bold mb-12 flex items-center gap-3">
                 <i data-lucide="award" class="text-indigo-500"></i> Responsibilities
@@ -272,7 +274,7 @@
         </div>
     </section>
 
-    <section id="resume" class="snap-start py-24 px-6 text-center border-t border-slate-900">
+    <section id="resume" class="snap-start snap-always py-24 px-6 text-center border-t border-slate-900">
         <div class="max-w-2xl mx-auto">
             <h2 class="text-3xl font-bold mb-6 italic text-indigo-500">Interested in working together?</h2>
             <p class="text-slate-400 mb-10">Download my resume to know more about my education, technical skills, and achievements.</p>
@@ -282,7 +284,7 @@
         </div>
     </section>
 
-    <section id="contact" class="snap-start py-24 px-6 bg-slate-900/30">
+    <section id="contact" class="snap-start snap-always py-24 px-6 bg-slate-900/30">
         <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16">
             <div>
                 <h2 class="text-4xl font-black mb-6">Let’s Connect 🤝</h2>
@@ -347,6 +349,19 @@
 
         // Target all elements with the 'reveal' class
         document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+        // Prevents accidental double-skipping of snapped sections
+        let isScrolling = false;
+
+        window.addEventListener('wheel', (e) => {
+            if (isScrolling) return;
+            
+            isScrolling = true;
+            setTimeout(() => {
+                isScrolling = false;
+            }, 1000); // 1-second "cooldown" before allowing the next major scroll snap
+        }, { passive: true });
+
     </script>
 </body>
 </html>
