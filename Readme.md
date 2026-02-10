@@ -6,7 +6,6 @@
 
 ## 🚀 Live Demo
 **[View Live Portfolio](https://kartikeyarev.github.io/portfolio)**
-*(Replace the link above with your actual GitHub Pages URL if different)*
 
 ---
 
