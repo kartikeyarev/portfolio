@@ -1,4 +1,4 @@
-# 👨‍💻 Kartikeya | Personal Portfolio
+# Kartikeya | Personal Portfolio
 
 ![Portfolio Preview](image.png)
 
