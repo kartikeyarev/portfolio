@@ -95,22 +95,33 @@
             KARTIK<span class="text-white">EYA</span>
         </span>
 
-        <div class="hidden lg:flex items-center space-x-8 font-medium text-slate-400 text-sm">
+        <div class="hidden lg:flex items-center space-x-8 font-medium text-slate-400 text-base">
             <a href="#home" class="hover:text-indigo-400 transition-colors">Home</a>
             <a href="#about" class="hover:text-indigo-400 transition-colors">About</a>
             <a href="#skills" class="hover:text-indigo-400 transition-colors">Skills</a>
             <a href="#projects" class="hover:text-indigo-400 transition-colors">Projects</a>
             <a href="#achievements" class="hover:text-indigo-400 transition-colors text-white/90">Achievements</a>
             <a href="#resume" class="hover:text-indigo-400 transition-colors">Resume</a>
-            
             <a href="#contact" class="bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 px-5 py-2 rounded-full hover:bg-indigo-500 hover:text-white transition-all duration-300">
                 Contact
             </a>
         </div>
 
-        <button class="lg:hidden text-white">
+        <button id="mobile-menu-btn" class="lg:hidden text-white focus:outline-none">
             <i data-lucide="menu"></i>
         </button>
+    </div>
+
+    <div id="mobile-menu" class="hidden lg:hidden absolute top-20 left-0 w-full bg-slate-950/95 backdrop-blur-md border-b border-indigo-500/20 shadow-xl">
+        <div class="flex flex-col p-6 space-y-4 text-center text-slate-300 font-medium">
+            <a href="#home" class="hover:text-indigo-400 mobile-link">Home</a>
+            <a href="#about" class="hover:text-indigo-400 mobile-link">About</a>
+            <a href="#skills" class="hover:text-indigo-400 mobile-link">Skills</a>
+            <a href="#projects" class="hover:text-indigo-400 mobile-link">Projects</a>
+            <a href="#achievements" class="hover:text-indigo-400 mobile-link">Achievements</a>
+            <a href="#resume" class="hover:text-indigo-400 mobile-link">Resume</a>
+            <a href="#contact" class="text-indigo-400 mobile-link">Contact</a>
+        </div>
     </div>
 </nav>
 
@@ -219,8 +230,8 @@
                         <h3 class="text-xl font-bold mb-2">Portfolio Website</h3>
                         <p class="text-slate-400 text-sm mb-4">Fully responsive site showcasing my skills and resume with modern Tailwind styling.</p>
                         <div class="flex gap-4">
-                            <a href="#" class="text-indigo-400 text-xs font-bold uppercase tracking-widest flex items-center gap-1 hover:text-white transition">Demo <i data-lucide="external-link" class="w-3 h-3"></i></a>
-                            <a href="#" class="text-slate-500 text-xs font-bold uppercase tracking-widest flex items-center gap-1 hover:text-white transition">GitHub <i data-lucide="github" class="w-3 h-3"></i></a>
+                            <a href="kartikeyarev.github.io/portfolio/" class="text-indigo-400 text-xs font-bold uppercase tracking-widest flex items-center gap-1 hover:text-white transition">Demo <i data-lucide="external-link" class="w-3 h-3"></i></a>
+                            <a href="https://github.com/kartikeyarev/portfolio" class="text-slate-500 text-xs font-bold uppercase tracking-widest flex items-center gap-1 hover:text-white transition">GitHub <i data-lucide="github" class="w-3 h-3"></i></a>
                         </div>
                     </div>
                 </div>
@@ -353,6 +364,23 @@
 
         // Target all elements with the 'reveal' class
         document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+        // Mobile Menu Toggle Logic
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        // Toggle menu on button click
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close menu when a link is clicked
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
 
     </script>
 </body>
